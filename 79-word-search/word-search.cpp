@@ -1,7 +1,6 @@
 class Solution {
 public:
     bool search(vector<vector<char>>& board, string & word,int row,int col,int index){
-        // int n=board.size();
         if(index==word.size()){
             return true;
         }
@@ -10,13 +9,16 @@ public:
         row>=board.size() || board[row][col]!=word[index]){
             return false;
         }
+        bool res=false;
+        if(board[row][col]==word[index]){
         char temp=board[row][col];
         board[row][col]='#';
-        bool res= search(board,word,row+1,col,index+1)||
+        res= search(board,word,row+1,col,index+1)||
                   search(board,word,row-1,col,index+1)||
                   search(board,word,row,col+1,index+1)||
                   search(board,word,row,col-1,index+1);
         board[row][col]=temp;
+        }
         return res;
     }
     bool exist(vector<vector<char>>& board, string word) {
